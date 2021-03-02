@@ -15,11 +15,8 @@ class BurgerBuilder extends Component {
     purchasing: false,
   };
 
-  componentWillMount() {
-    this.props.initCreateOrder();
-  }
-
   componentDidMount() {
+    this.props.initCreateOrder();
     this.props.fetchIngredients();
   }
 

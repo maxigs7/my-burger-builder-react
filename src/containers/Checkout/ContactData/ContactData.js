@@ -10,7 +10,7 @@ import * as orderActions from '../../../store/actions/index';
 class ContactData extends Component {
   state = {
     formIsValid: false,
-    orderForm: {
+    form: {
       name: {
         elementType: 'input',
         elementConfig: {
@@ -89,8 +89,8 @@ class ContactData extends Component {
     event.preventDefault();
 
     const formData = {};
-    for (let key in this.state.orderForm) {
-      formData[key] = this.state.orderForm[key].value;
+    for (let key in this.state.form) {
+      formData[key] = this.state.form[key].value;
     }
 
     const orderData = {
@@ -100,7 +100,7 @@ class ContactData extends Component {
       date: new Date(),
     };
 
-    this.props.createOrder(orderData);
+    this.props.onCreateOrder(orderData);
   };
 
   checkValidity = (value, rules) => {
@@ -124,7 +124,7 @@ class ContactData extends Component {
   };
 
   inputChangedHandler = (evt, inputKey) => {
-    const updatedOrderForm = { ...this.state.orderForm };
+    const updatedOrderForm = { ...this.state.form };
     const field = { ...updatedOrderForm[inputKey] };
     field.value = evt.target.value;
     field.valid = this.checkValidity(field.value, field.validation);
@@ -143,11 +143,11 @@ class ContactData extends Component {
   };
 
   renderForm() {
-    const keys = Object.keys(this.state.orderForm);
+    const keys = Object.keys(this.state.form);
     return (
       <form onSubmit={this.orderHandler}>
         {keys.map((key) => {
-          const el = this.state.orderForm[key];
+          const el = this.state.form[key];
           return (
             <Input
               key={key}
@@ -190,7 +190,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    createOrder: (orderData) => dispatch(orderActions.createOrder(orderData)),
+    onCreateOrder: (orderData) => dispatch(orderActions.createOrder(orderData)),
   };
 };
 

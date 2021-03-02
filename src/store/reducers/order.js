@@ -21,6 +21,7 @@ const createOrderStart = (state, action) => {
     error: null,
   });
 };
+
 const createOrderSuccess = (state, action) => {
   return updateObject(state, {
     orders: [updateObject(action.order, { id: action.id })],
@@ -35,6 +36,7 @@ const createOrderFail = (state, action) => {
     error: action.error,
   });
 };
+
 const fetchOrdersStart = (state, action) => {
   return updateObject(state, {
     orders: [],
@@ -42,6 +44,7 @@ const fetchOrdersStart = (state, action) => {
     error: null,
   });
 };
+
 const fetchOrdersSuccess = (state, action) => {
   return updateObject(state, {
     orders: action.orders,
